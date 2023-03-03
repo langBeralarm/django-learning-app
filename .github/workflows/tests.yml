@@ -2,11 +2,9 @@ name: Tests
 
 on:
   pull_request:
-    branches:
-      - [ "main", "dev" ]
+    branches: [ "main", "dev" ]
   push:
-    branches:
-      - [ "*" ]
+    branches: [ "*" ]
 jobs:
   django_test:
     runs-on: ubuntu-latest
@@ -21,6 +19,6 @@ jobs:
         env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
-          cd todo
+          cd todo_app
           python manage.py test
 
