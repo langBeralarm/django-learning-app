@@ -16,17 +16,29 @@
           {% for todo in todos %}
             <li
               class="flex flex-row text-center items-center justify-center rounded-lg border-2 border-indigo-500 py-1 px-2 my-1.5 text-left">
-              {% if todo.status == "CLD" %}
-                <img src="{% static 'todo/status/completed-task.png' %}" alt="Completed icon" width="50">
-              {% elif todo.status == "WIP" %}
-                <img src="{% static 'todo/status/in-arbeit.png' %}" alt="In progress icon" width="50">
-              {% elif todo.status == "OPN" %}
-                <img src="{% static 'todo/status/wall-clock.png' %}" alt="Open icon" width="50">
-              {% endif %}
+              <div class="flex flex-col space-y-3">
+                {% if todo.status == "CLD" %}
+                  <img src="{% static 'todo/status/completed-task.png' %}" alt="Completed icon" width="30">
+                {% elif todo.status == "WIP" %}
+                  <img src="{% static 'todo/status/in-arbeit.png' %}" alt="In progress icon" width="30">
+                {% elif todo.status == "OPN" %}
+                  <img src="{% static 'todo/status/wall-clock.png' %}" alt="Open icon" width="30">
+                {% endif %}
+                {% if todo.priority == "U" %}
+                  <img src="{% static 'todo/priority/urgent-priority.png' %}" alt="Completed icon" width="30">
+                {% elif todo.priority == "H" %}
+                  <img src="{% static 'todo/priority/high-priority.png' %}" alt="In progress icon" width="30">
+                {% elif todo.priority == "N" %}
+                  <img src="{% static 'todo/priority/normal-priority.png' %}" alt="Open icon" width="30">
+                {% elif todo.priority == "L" %}
+                  <img src="{% static 'todo/priority/low-priority.png' %}" alt="Open icon" width="30">
+                {% endif %}
+              </div>
               <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ todo.title }}</h2>
               <p class="leading-relaxed">{{ todo.description|truncatewords:15 }}</p>
               <p class="leading-relaxed">Created: {{ todo.creation_date|date:"j. M. Y" }}</p>
-              <a class="text-indigo-500 hover:text-indigo-400 inline-flex items-center" href="#">Learn More
+              <a class="text-indigo-500 hover:text-indigo-400 inline-flex items-center"
+                 href="{% url "todo:todo_detail" todo.pk %}">Learn More
                 <svg class="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
                      stroke-linecap="round" stroke-linejoin="round">
                   <path d="M5 12h14"></path>
