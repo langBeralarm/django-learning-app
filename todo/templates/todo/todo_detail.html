@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ todo.title }} | ToDo
+{% endblock %}
+
+{% block content %}
+  <section class="text-gray-600 body-font">
+    <div class="container mx-auto flex px-5 py-24 items-left justify-left flex-col">
+      <div class="flex flex-row space-x-4">
+        <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">{{ todo.title }}</h1>
+        {% if todo.status == "CLD" %}
+          <img src="{% static 'todo/status/completed-task.png' %}" alt="Completed icon" class="!h-[40px]">
+        {% elif todo.status == "WIP" %}
+          <img src="{% static 'todo/status/in-arbeit.png' %}" alt="In progress icon" class="!h-[40px]">
+        {% elif todo.status == "OPN" %}
+          <img src="{% static 'todo/status/wall-clock.png' %}" alt="Open icon" class="!h-[40px]">
+        {% endif %}
+        {% if todo.priority == "U" %}
+          <img src="{% static 'todo/priority/urgent-priority.png' %}" alt="Completed icon" class="!h-[40px]">
+        {% elif todo.priority == "H" %}
+          <img src="{% static 'todo/priority/high-priority.png' %}" alt="In progress icon" class="!h-[40px]">
+        {% elif todo.priority == "N" %}
+          <img src="{% static 'todo/priority/normal-priority.png' %}" alt="Open icon" class="!h-[40px]">
+        {% elif todo.priority == "L" %}
+          <img src="{% static 'todo/priority/low-priority.png' %}" alt="Open icon" class="!h-[40px]">
+        {% endif %}
+      </div>
+      <div class="text-left lg:w-2/3 w-full">
+        <p class="mb-8 leading-relaxed">{{ todo.description }}</p>
+        <p class="mb-8 leading-relaxed">Created: {{ todo.creation_date }}</p>
+        <p class="mb-8 leading-relaxed">Due: {{ todo.due_date }}</p>
+        <div class="flex justify-left">
+          <a href="#"
+             class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
