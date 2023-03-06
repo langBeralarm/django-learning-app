@@ -17,11 +17,11 @@
             <li
               class="flex flex-row text-center items-center justify-center rounded-lg border-2 border-indigo-500 py-1 px-2 my-1.5 text-left">
               {% if todo.status == "CLD" %}
-                <img src="{% static 'todo/completed-task.png' %}" alt="Completed icon" width="50">
+                <img src="{% static 'todo/status/completed-task.png' %}" alt="Completed icon" width="50">
               {% elif todo.status == "WIP" %}
-                <img src="{% static 'todo/in-arbeit.png' %}" alt="In progress icon" width="50">
+                <img src="{% static 'todo/status/in-arbeit.png' %}" alt="In progress icon" width="50">
               {% elif todo.status == "OPN" %}
-                <img src="{% static 'todo/wall-clock.png' %}" alt="Open icon" width="50">
+                <img src="{% static 'todo/status/wall-clock.png' %}" alt="Open icon" width="50">
               {% endif %}
               <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ todo.title }}</h2>
               <p class="leading-relaxed">{{ todo.description|truncatewords:15 }}</p>
