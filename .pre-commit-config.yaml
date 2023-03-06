@@ -3,7 +3,6 @@ repos:
     rev: 23.1.0
     hooks:
     - id: black
-      exclude: \.py-tpl$
   - repo: https://github.com/adamchainz/blacken-docs
     rev: 1.13.0
     hooks:

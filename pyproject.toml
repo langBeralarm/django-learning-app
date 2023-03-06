@@ -13,5 +13,6 @@ extend-exclude = '''
   | buck-out
   | build
   | dist
+  | \.py-tpl$
 )/
 '''
