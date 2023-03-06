@@ -35,3 +35,6 @@ class ToDoItem(models.Model):
         choices=ToDoPriority.choices,
         default=ToDoPriority.NORMAL,
     )
+
+
+# TODO: Add str method
