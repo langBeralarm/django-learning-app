@@ -10,7 +10,7 @@ class ToDoItem(models.Model):
 
     title = models.CharField(max_length=100)
     description = models.TextField(null=True, blank=True, max_length=1000)
-    creation_date = models.DateTimeField()
+    creation_date = models.DateTimeField(auto_now_add=True)
     due_date = models.DateTimeField(null=True, blank=True)
 
     class ToDoStatus(models.TextChoices):
