@@ -36,5 +36,5 @@ class ToDoItem(models.Model):
         default=ToDoPriority.NORMAL,
     )
 
-
-# TODO: Add str method
+    def __str__(self):
+        return self.title
