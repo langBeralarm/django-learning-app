@@ -1,14 +1,10 @@
-from django.shortcuts import render
+from django.views import generic
 
 from .models import ToDoItem
 
 
-def todo_list(request):
-    todos = ToDoItem.objects.all()
-    return render(
-        request,
-        "todo/todo_list.html",
-        {
-            "todos": todos,
-        },
-    )
+class ToDoList(generic.ListView):
+    model = ToDoItem
+    queryset = ToDoItem.objects.all()
+    context_object_name = "todos"
+    template_name = "todo/todo_list.html"
