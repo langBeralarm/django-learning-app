@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from todo.forms import ToDoCreateForm
+from todo.forms import ToDoForm
 from todo.models import ToDoItem
 from todo.views import ToDoDeleteView
 
@@ -35,7 +35,7 @@ class ToDoItemTestCase(TestCase):
             "status": "OPN",
             "priority": "N",
         }
-        form = ToDoCreateForm(data=form_data)
+        form = ToDoForm(data=form_data)
         self.assertTrue(form.is_valid())
 
         todos = ToDoItem.objects.all().count()
