@@ -7,7 +7,7 @@
 
 {% block content %}
   <section class="text-gray-600 body-font overflow-hidden">
-    <div class="container px-5 py-24 mx-auto">
+    <div class="container px-5 py-4 mx-auto">
       {% if not todos %}
         <h1 class="text-2xl font-medium text-gray-900 title-font mb-2">Currently, there aren't any ToDo's.</h1>
       {% else %}
@@ -15,8 +15,8 @@
         <ul class="flex flex-col">
           {% for todo in todos %}
             <li
-              class="flex flex-row text-center items-center justify-center rounded-lg border-2 border-indigo-500 py-1 px-2 my-1.5 text-left">
-              <div class="flex flex-col space-y-3">
+              class="flex flex-row text-center items-center justify-center space-x-1.5 rounded-lg border-2 border-indigo-500 py-1 px-2 my-1.5 text-left">
+              <div class="flex flex-col max-w-[2.5%] space-y-3">
                 {% if todo.status == "CLD" %}
                   <img src="{% static 'todo/status/completed-task.png' %}" alt="Completed icon" width="30">
                 {% elif todo.status == "WIP" %}
@@ -34,10 +34,10 @@
                   <img src="{% static 'todo/priority/low-priority.png' %}" alt="Open icon" width="30">
                 {% endif %}
               </div>
-              <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">{{ todo.title }}</h2>
-              <p class="leading-relaxed">{{ todo.description|truncatewords:15 }}</p>
+              <h2 class="text-2xl font-medium text-gray-900 title-font mb-2 w-[30%]">{{ todo.title }}</h2>
+              <p class="leading-relaxed w-[30%]">{{ todo.description|truncatechars:20 }}</p>
               <p class="leading-relaxed">Created: {{ todo.creation_date|date:"j. M. Y" }}</p>
-              <a class="text-indigo-500 hover:text-indigo-400 inline-flex items-center"
+              <a class="text-indigo-500 hover:text-indigo-400 hover:no-underline inline-flex items-center"
                  href="{% url "todo:todo_detail" todo.pk %}">Learn More
                 <svg class="w-4 h-4" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
                      stroke-linecap="round" stroke-linejoin="round">

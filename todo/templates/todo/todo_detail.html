@@ -33,7 +33,7 @@
         <p class="mb-8 leading-relaxed">Due: {{ todo.due_date }}</p>
         <div class="flex justify-left">
           <a href="{% url "todo:todo_delete" todo.pk %}"
-             class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+             class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 hover:no-underline focus:outline-none hover:bg-indigo-600 rounded text-lg">
             Delete
           </a>
         </div>
