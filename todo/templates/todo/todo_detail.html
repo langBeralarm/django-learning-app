@@ -31,7 +31,11 @@
         <p class="mb-8 leading-relaxed">{{ todo.description }}</p>
         <p class="mb-8 leading-relaxed">Created: {{ todo.creation_date }}</p>
         <p class="mb-8 leading-relaxed">Due: {{ todo.due_date }}</p>
-        <div class="flex justify-left">
+        <div class="flex justify-left space-x-1.5">
+          <a href="{% url "todo:todo_update" todo.pk %}"
+             class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 hover:no-underline focus:outline-none hover:bg-indigo-600 rounded text-lg">
+            Update
+          </a>
           <a href="{% url "todo:todo_delete" todo.pk %}"
              class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 hover:no-underline focus:outline-none hover:bg-indigo-600 rounded text-lg">
             Delete

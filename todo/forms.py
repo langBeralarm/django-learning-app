@@ -3,7 +3,7 @@ from django.forms import DateInput, ModelForm
 from .models import ToDoItem
 
 
-class ToDoCreateForm(ModelForm):
+class ToDoForm(ModelForm):
     class Meta:
         model = ToDoItem
         fields = ["title", "description", "due_date", "status", "priority"]
