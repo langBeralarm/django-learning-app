@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.test import Client, TestCase
 from django.urls import NoReverseMatch, reverse
 
@@ -94,3 +95,28 @@ class ToDoListTestCase(TestCase):
         )
         self.assertEqual(response.url, reverse("todo:todo_list"))
         self.assertEqual(ToDoItem.objects.all().count(), 0)
+
+    def test_call_todo_update_view(self):
+        with self.assertRaises(NoReverseMatch):
+            self.client.get(reverse("todo:todo_update"))
+
+        with self.assertRaises(ObjectDoesNotExist):
+            self.client.get(
+                reverse(
+                    "todo:todo_update",
+                    kwargs={
+                        "pk": 1,
+                    },
+                )
+            )
+
+        add_todo()
+        response = self.client.get(
+            reverse(
+                "todo:todo_update",
+                kwargs={
+                    "pk": 1,
+                },
+            )
+        )
+        self.assertEqual(response.status_code, 200)

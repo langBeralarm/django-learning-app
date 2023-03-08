@@ -68,3 +68,33 @@ class ToDoItemTestCase(TestCase):
         }
         form = ToDoDeleteView.form_class(data=form_data)
         self.assertTrue(form.is_valid())
+
+    def test_todo_update(self):
+        self.assertEqual(ToDoItem.objects.all().count(), 0)
+
+        todo = ToDoItem.objects.create(title="ToDo Item")
+        self.assertEqual(ToDoItem.objects.all().count(), 1)
+        self.assertEqual(todo.title, "ToDo Item")
+
+        todo.title = "ToDo Item updated"
+        todo.save()
+        self.assertEqual(todo.title, "ToDo Item updated")
+
+    def test_todo_update_form(self):
+        todo = ToDoItem.objects.create(title="ToDo Item")
+        todos = ToDoItem.objects.all().count()
+        self.assertEqual(todos, 1)
+
+        form_data = {
+            "title": "ToDo Item updated",
+            "status": "OPN",
+            "priority": "N",
+        }
+        form = ToDoForm(instance=todo, data=form_data)
+        self.assertTrue(form.is_valid())
+
+        form.save()
+
+        todos = ToDoItem.objects.all().count()
+        self.assertEqual(todos, 1)
+        self.assertEqual(todo.title, "ToDo Item updated")
