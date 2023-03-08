@@ -43,6 +43,7 @@ jobs:
         uses: isort/isort-action@master
         with:
           requirements-files: "requirements.txt"
+          configuration: "--profile black"
 
   black:
     runs-on: ubuntu-latest
