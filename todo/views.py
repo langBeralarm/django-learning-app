@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from .forms import ToDoCreateForm
@@ -39,3 +40,10 @@ class ToDoCreateView(generic.CreateView):
                 "form": form,
             },
         )
+
+
+class ToDoDeleteView(generic.DeleteView):
+    model = ToDoItem
+    template_name = "todo/todo_delete.html"
+    success_url = reverse_lazy("todo:todo_list")
+    context_object_name = "todo"
