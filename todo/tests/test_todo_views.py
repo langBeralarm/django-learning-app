@@ -1,12 +1,11 @@
-from django.core.exceptions import ObjectDoesNotExist
 from django.test import Client, TestCase
 from django.urls import NoReverseMatch, reverse
 
 from todo.models import ToDoItem
 
 
-def add_todo():
-    ToDoItem.objects.create(title="Test ToDo")
+def add_todo() -> ToDoItem:
+    return ToDoItem.objects.create(title="Test ToDo")
 
 
 class ToDoListTestCase(TestCase):
@@ -100,17 +99,6 @@ class ToDoListTestCase(TestCase):
         with self.assertRaises(NoReverseMatch):
             self.client.get(reverse("todo:todo_update"))
 
-        with self.assertRaises(ObjectDoesNotExist):
-            self.client.get(
-                reverse(
-                    "todo:todo_update",
-                    kwargs={
-                        "pk": 1,
-                    },
-                )
-            )
-
-        add_todo()
         response = self.client.get(
             reverse(
                 "todo:todo_update",
@@ -119,4 +107,35 @@ class ToDoListTestCase(TestCase):
                 },
             )
         )
+        self.assertEqual(response.status_code, 404)
+
+    def test_todo_update_view_post(self):
+        todo = add_todo()
+        response = self.client.get(
+            reverse(
+                "todo:todo_update",
+                kwargs={
+                    "pk": todo.pk,
+                },
+            )
+        )
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(todo.title, "Test ToDo")
+        self.assertEqual(ToDoItem.objects.all().count(), 1)
+
+        response = self.client.post(
+            reverse(
+                "todo:todo_update",
+                kwargs={
+                    "pk": todo.pk,
+                },
+            ),
+            {
+                "title": "ToDo updated",
+                "status": "OPN",
+                "priority": "N",
+            },
+        )
+        todo = ToDoItem.objects.get(pk=todo.pk)
+        self.assertEqual(todo.title, "ToDo updated")
+        self.assertEqual(ToDoItem.objects.all().count(), 1)

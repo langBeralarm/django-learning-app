@@ -54,30 +54,7 @@ class ToDoUpdateView(generic.UpdateView):
     form_class = ToDoForm
     template_name = "todo/todo_update.html"
     context_object_name = "todo"
+    success_url = reverse_lazy("todo:todo_list")
 
-    def post(self, request, *args, **kwargs):
-        if self.request.method == "POST":
-            form = ToDoForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return redirect("todo:todo_list")
-        else:
-            todo = self.get_object()
-            initial_data = {
-                "title": todo.title,
-                "description": todo.description,
-                "due_date": todo.due_date,
-                "status": todo.status,
-                "priority": todo.priority,
-            }
-            form = ToDoForm(initial=initial_data)
-        return render(
-            request,
-            "todo/todo_create.html",
-            {
-                "form": form,
-            },
-        )
-
-    def get_object(self, queryset=None):
-        return ToDoItem.objects.get(pk=self.kwargs["pk"])
+    # def get_object(self, queryset=None):
+    #     return ToDoItem.objects.get(pk=self.kwargs["pk"])
